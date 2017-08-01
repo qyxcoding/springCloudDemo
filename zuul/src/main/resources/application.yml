@@ -1,0 +1,30 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7070/eureka/
+server:
+  port: 7073
+spring:
+  application:
+    name: zuul
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: api-b
+    server-b:
+      path: /service-b/**
+      serviceId: service-b
+    api-a-url:
+      path: /hystrix/**
+      serviceId: hystrix
+    AccessFilter:
+     pre:
+      disable: true
+   #url:http://localhost:7074/
+hystrix:
+ ribbon:
+  listOfServers: localhost:7077
+logging:
+ level:
+  com.netflix:DUEBUG
